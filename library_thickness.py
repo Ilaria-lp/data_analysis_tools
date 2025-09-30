@@ -13,9 +13,9 @@ import xraylib as xl
 Ef = 6.4 # fluorescence of Fe Kalpha (keV)
 E0 = 10  # primary Xray energy (keV)
 
-i0 = 2.25e9
+i0 = 2.25e9    # this has to be evaluated on a reference sample, then can be used for all the samples in the same experimental run
 
-abs_jump_fact = 0.9
+abs_jump_fact = 0.9              # for Fe Kalpha --> 10.1016/j.apradiso.2014.10.012
 emission_rate_Kline = xl.RadRate(26, xl.KL3_LINE)
 Fe_fluo_yield = xl.FluorYield(26, xl.K_SHELL)
 
@@ -23,8 +23,8 @@ Fe_fluo_yield = xl.FluorYield(26, xl.K_SHELL)
 excit_fact = abs_jump_fact * emission_rate_Kline * Fe_fluo_yield
 
 CS_Fe_E0 = xl.CS_Photo(26, 10)
-det_accept = 3*50 / ( 4* (math.pi) *30**2)
-det_efficiency = 0.995
+det_accept = 3*50 / ( 4* (math.pi) *30**2)    # for Sirius 3-elements, installed at the XRF beamline
+det_efficiency = 0.995                        # estimated using PyMCA
 
 expt_constant = i0 * excit_fact * CS_Fe_E0 * det_accept * det_efficiency
 
